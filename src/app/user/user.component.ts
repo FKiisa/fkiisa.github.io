@@ -2,9 +2,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { LogAction } from 'src/interfaces/log.interface';
 import { Album, Photo, User } from 'src/interfaces/user.interface';
 import { AppService } from '../app.service';
 import { SnackBarMessageService } from '../helpers/snackbar.helper';
+import { LogService } from '../log.service';
 import { ApiService } from '../services/api.service';
 
 @Component({
@@ -14,7 +16,7 @@ import { ApiService } from '../services/api.service';
 })
 export class UserComponent implements OnInit {
 
-  userId: string;
+  userId: number;
   albumId: number;
   albumTitle: Album;
   userAlbums: Album[] = [];
@@ -31,12 +33,12 @@ export class UserComponent implements OnInit {
   albumForm = new FormGroup({
     albumTitle: new FormControl('', Validators.required),
   });
-  constructor(private service: ApiService, private appService: AppService, private route: ActivatedRoute, public snackBar: SnackBarMessageService) { }
+  constructor(private service: ApiService, private appService: AppService, private route: ActivatedRoute, public snackBar: SnackBarMessageService, private logService: LogService) { }
 
   ngOnInit() {
-    this.userId = this.route.snapshot.paramMap.get('userId')!;
-    this.getUserDetails(parseInt(this.userId));
-    this.getUserAlbums(parseInt(this.userId));
+    this.userId = parseInt(this.route.snapshot.paramMap.get('userId')!);
+    this.getUserDetails(this.userId);
+    this.getUserAlbums(this.userId);
   }
 
   async getUserDetails(id: number) {
@@ -73,13 +75,15 @@ export class UserComponent implements OnInit {
       }
     });
     this.removedAlbumCount++;
-      
+    this.logService.addLog(this.userId, albumId, LogAction.RemoveAlbum);
+
     snackBarRef.onAction().subscribe(() => {
       this.undo = true;
       this.userAlbums.push(this.removedAlbums);
       this.userAlbums.sort((a, b) => a.id - b.id);
       this.snackBar.snackBarSuccess('Album restored', 'Ok');
       this.removedAlbumCount--;
+      this.logService.addLog(this.userId, albumId, LogAction.UndoAlbum);
     })
   }
 
@@ -90,11 +94,14 @@ export class UserComponent implements OnInit {
 
   handleAddNewAlbum = () => {
     this.undo = false;
-    let snackBarRef = this.snackBar.snackBarSuccess(`Album: '${this.userAlbums.length}' added!`, 'Undo');
-    this.userAlbums.push(new Album(parseInt(this.userId), this.userAlbums.length, this.albumForm.value.albumTitle!));
+    let newAlbumId = this.userAlbums[this.userAlbums.length - 1].id + 1;
+    let snackBarRef = this.snackBar.snackBarSuccess(`Album: '${newAlbumId}' added!`, 'Undo');
+    this.userAlbums.push(new Album(this.userId, newAlbumId, this.albumForm.value.albumTitle!));
+    this.logService.addLog(this.userId, newAlbumId, LogAction.AddAlbum);
     this.addedAlbumCount++;
 
     snackBarRef.onAction().subscribe(() => {
+      this.logService.addLog(this.userId, newAlbumId, LogAction.UndoAlbum);
       this.undo = true;
       this.userAlbums.pop();
       this.addedAlbumCount--;

@@ -1,0 +1,22 @@
+.root {
+    max-width: 800px;
+    background: white;
+    margin: 16px auto;
+    padding: 8px 16px 16px;
+    border-radius: 4px;
+}
+
+.activity-log-title {
+    text-transform: uppercase;
+    text-align:center;
+}
+
+.activity-log-empty, .activity-log-item {
+    text-align: center;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.activity-log-list {
+    list-style: none;
+}

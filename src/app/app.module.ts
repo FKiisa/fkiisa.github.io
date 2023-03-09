@@ -24,11 +24,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SnackBarMessageService } from './helpers/snackbar.helper';
 import { MatDividerModule } from '@angular/material/divider';
+import { LogsComponent } from './logs/logs.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'user/:userId', component: UserComponent },
   { path: 'user/:userId/album/:albumId/photos', component: AlbumsComponent },
+  { path: 'logs', component: LogsComponent },
 ]
 
 @NgModule({
@@ -36,7 +38,8 @@ const routes: Routes = [
     AppComponent,
     UserComponent,
     AlbumsComponent,
-    HomeComponent
+    HomeComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,

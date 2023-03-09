@@ -19,6 +19,9 @@ body {
     right: 0;
     color: black;
 }
+.mat-ripple, .mat-mdc-button-ripple{ 
+    display: none;
+}
 
 .green-snackbar {
     background: #4CAF50;
@@ -27,6 +30,10 @@ body {
 }
 
 .green-snackbar button {
+    background-color: #4CAF50;
+    color: white !important;
+}
+.green-snackbar button:target {
     background-color: #4CAF50;
     color: white !important;
 }

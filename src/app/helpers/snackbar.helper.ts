@@ -4,7 +4,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 @Injectable()
 export class SnackBarMessageService {
     constructor(public snackBar: MatSnackBar) { }
-    defaultDuration: number = 3000;
+    defaultDuration: number = 300000;
     snackBarSuccess(message: string, action: string = "Ok") {
         return this.snackBar.open(message, action, this.configSuccess);
     }

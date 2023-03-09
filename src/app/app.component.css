@@ -1,8 +1,9 @@
 .toolbar {
     text-align: center;
+    justify-content: space-between;
   }
 
-  .homeIcon {
+  .homeIcon, .activityLog {
     font-size: 1.3rem;
     text-decoration: none;
     color: #1d1d1d;

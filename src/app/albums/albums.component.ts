@@ -6,6 +6,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { SnackBarMessageService } from '../helpers/snackbar.helper';
+import { LogService } from '../log.service';
+import { LogAction } from 'src/interfaces/log.interface';
 
 @Component({
   selector: 'app-albums',
@@ -16,19 +18,20 @@ export class AlbumsComponent implements OnInit {
   albumPhotos: Photo[] = [];
   albumTitle: Album;
   albumId: number;
+  userId: number;
   addingNewImage: boolean = false;
   undo: boolean = false;
   removedImage: Photo;
-
   imageForm = new FormGroup({
     imageTitle: new FormControl('', Validators.required),
     imageUrl: new FormControl('', Validators.required),
   });
 
-  constructor(private service: ApiService, private appService: AppService, public dialog: MatDialog, private route: ActivatedRoute, public snackBar: SnackBarMessageService) { }
+  constructor(private service: ApiService, private appService: AppService, public dialog: MatDialog, private route: ActivatedRoute, public snackBar: SnackBarMessageService, private logService: LogService) { }
 
   ngOnInit() {
     this.albumId = parseInt(this.route.snapshot.paramMap.get('albumId')!);
+    this.userId = parseInt(this.route.snapshot.paramMap.get('userId')!);
     this.getAlbumImages(this.albumId);
     this.appService.albumPhotosObs.subscribe(data => {
       this.albumPhotos = data;
@@ -58,12 +61,14 @@ export class AlbumsComponent implements OnInit {
         if (el.id === image.id) {
           this.removedImage = new Photo(el.albumId, el.id, el.title, el.url);
           this.albumPhotos.splice(idx, 1);
+          this.logService.addLog(this.userId, this.albumId, LogAction.RemoveImage, this.removedImage.id);
         }
       });
     }
     snackBarRef.onAction().subscribe(() => {
       this.undo = true;
       this.albumPhotos.push(new Photo(this.removedImage.albumId, this.removedImage.id, this.removedImage.title, this.removedImage.url));
+      this.logService.addLog(this.userId, this.albumId, LogAction.UndoImage, this.removedImage.id);
       this.albumPhotos.sort((a, b) => a.id - b.id);
       this.snackBar.snackBarSuccess('Image restored', 'Ok');
     })
@@ -76,13 +81,16 @@ export class AlbumsComponent implements OnInit {
 
   handleAddNewImage = () => {
     this.undo = false;
-    let snackBarRef = this.snackBar.snackBarSuccess(`Image: '${this.albumPhotos.length} - ${this.imageForm.value.imageTitle}' added!`, 'Undo')
-    this.albumPhotos.push(new Photo(this.albumId, this.albumPhotos.length, this.imageForm.value.imageTitle!, this.imageForm.value.imageUrl!));
+    let newPhotoId = this.albumPhotos[this.albumPhotos.length - 1].id + 1;
+    let snackBarRef = this.snackBar.snackBarSuccess(`Image: '${newPhotoId} - ${this.imageForm.value.imageTitle}' added!`, 'Undo')
+    this.albumPhotos.push(new Photo(this.albumId, newPhotoId, this.imageForm.value.imageTitle!, this.imageForm.value.imageUrl!));
+    this.logService.addLog(this.userId, this.albumId, LogAction.AddImage, newPhotoId);
 
     snackBarRef.onAction().subscribe(() => {
       this.undo = true;
       this.albumPhotos.pop();
       this.snackBar.snackBarSuccess('Image removed', 'Ok');
+      this.logService.addLog(this.userId, this.albumId, LogAction.UndoImage, newPhotoId);
     });
   }
 }
