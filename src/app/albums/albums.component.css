@@ -11,7 +11,13 @@
     width: 30%;
     margin: 4px;
     object-fit: cover;
-    aspect-ratio: 1;
+}
+
+.image-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .image-element:hover{

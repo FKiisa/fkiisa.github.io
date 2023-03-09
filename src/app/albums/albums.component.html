@@ -2,12 +2,13 @@
   <h2 class="album-title">
     Album - {{ albumId }} - {{ albumTitle }} ({{ albumPhotos.length }} images)
   </h2>
-  <p class="album-note"><b>NOTE:</b> Clicking on an image removes it from the album!</p>
+  <p class="album-note">
+    <b>NOTE:</b> Clicking on an image removes it from the album!
+  </p>
   <div class="image-add">
     <button mat-raised-button (click)="openNewImagePanel()">
       {{ addingNewImage ? "Close Panel" : "Add Image" }}
     </button>
-    <div *ngIf="addingNewImage"></div>
   </div>
   <div *ngIf="addingNewImage" class="image-add-new">
     <form
@@ -32,7 +33,12 @@
         type="text"
         formControlName="imageUrl"
       />
-      <button mat-raised-button type="submit" [disabled]="!imageForm.valid" class="add-image-button-common">
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="!imageForm.valid"
+        class="add-image-button-common"
+      >
         Add Image
       </button>
     </form>
