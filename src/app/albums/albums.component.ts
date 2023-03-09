@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Album, Photo } from 'src/interfaces/user.interface';
-import { AlbumService } from '../album.service';
+import { AlbumService } from '../services/album.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { SnackBarMessageService } from '../helpers/snackbar.helper';
-import { LogService } from '../log.service';
+import { LogService } from '../services/log.service';
 import { LogAction } from 'src/interfaces/log.interface';
 
 @Component({

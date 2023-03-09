@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { LogAction } from 'src/interfaces/log.interface';
 import { Album, Photo, User } from 'src/interfaces/user.interface';
-import { AlbumService } from '../album.service';
+import { AlbumService } from '../services/album.service';
 import { SnackBarMessageService } from '../helpers/snackbar.helper';
-import { LogService } from '../log.service';
+import { LogService } from '../services/log.service';
 import { ApiService } from '../services/api.service';
 
 @Component({
