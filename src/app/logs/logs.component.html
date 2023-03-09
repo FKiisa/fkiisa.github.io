@@ -1,8 +1,13 @@
 <div class="root">
-    <h2 class="activity-log-title">Activity Log</h2>
-    <p *ngIf="activityLog.length <= 0" class="activity-log-empty">Log empty, try adding or removing albums/images.</p>
-    <li *ngFor="let log of activityLog; let lastItem = last;" class="activity-log-list">
-        <p class="activity-log-item">{{log}}</p>
-        <mat-divider *ngIf="!lastItem"></mat-divider>
-    </li>
+  <h2 class="activity-log-title">Activity Log</h2>
+  <p *ngIf="activityLog.length <= 0" class="activity-log-empty">
+    Log empty, try adding or removing albums/images.
+  </p>
+  <li
+    *ngFor="let log of activityLog; let lastItem = last"
+    class="activity-log-list"
+  >
+    <p class="activity-log-item">{{ log }}</p>
+    <mat-divider *ngIf="!lastItem"></mat-divider>
+  </li>
 </div>

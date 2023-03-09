@@ -9,7 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { AppService } from './app.service';
+import { AlbumService } from './album.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -65,7 +65,7 @@ const routes: Routes = [
     NO_ERRORS_SCHEMA,
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [AppService, SnackBarMessageService],
+  providers: [AlbumService, SnackBarMessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

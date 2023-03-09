@@ -1,13 +1,17 @@
 <div class="root">
-  <h2 *ngIf="userDetails" class="album-detail">
+  <h2 *ngIf="userDetails" class="album-common">
     {{ userDetails.name }}s albums ({{ userAlbums.length }})
   </h2>
-  <div class="user-stat-container">
+  <div class="user-stat-container album-common">
     Total Albums: {{ userAlbums.length }} Albums Added:
     {{ addedAlbumCount }} Albums Removed: {{ removedAlbumCount }}
   </div>
   <div class="album-add">
-    <button mat-raised-button (click)="openNewImagePanel()" class="album-create-new-common">
+    <button
+      mat-raised-button
+      (click)="openNewAlbumPanel()"
+      class="album-create-new-common"
+    >
       {{ addingNewAlbum ? "Close Panel" : "Create new album" }}
     </button>
     <div *ngIf="addingNewAlbum"></div>
@@ -27,7 +31,12 @@
         type="text"
         formControlName="albumTitle"
       />
-      <button mat-raised-button type="submit" [disabled]="!albumForm.valid" class="album-create-new-common">
+      <button
+        mat-raised-button
+        type="submit"
+        [disabled]="!albumForm.valid"
+        class="album-create-new-common"
+      >
         Create new Album
       </button>
     </form>

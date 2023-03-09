@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/interfaces/user.interface';
 import { ApiService } from '../services/api.service'; 
@@ -16,9 +15,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getUsers();
   }
-
+/**
+ * Method is used for sending a request to getting the users available from API
+ */
   async getUsers() {
     await this.service.getUsers().then(() => this.users = this.service.users);
-    console.log(this.users);
   }
 }

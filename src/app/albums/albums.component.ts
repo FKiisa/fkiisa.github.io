@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Album, Photo } from 'src/interfaces/user.interface';
-import { AppService } from '../app.service';
+import { AlbumService } from '../album.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -27,32 +27,39 @@ export class AlbumsComponent implements OnInit {
     imageUrl: new FormControl('', Validators.required),
   });
 
-  constructor(private service: ApiService, private appService: AppService, public dialog: MatDialog, private route: ActivatedRoute, public snackBar: SnackBarMessageService, private logService: LogService) { }
+  constructor(private service: ApiService, private albumService: AlbumService, public dialog: MatDialog, private route: ActivatedRoute, public snackBar: SnackBarMessageService, private logService: LogService) { }
 
   ngOnInit() {
     this.albumId = parseInt(this.route.snapshot.paramMap.get('albumId')!);
     this.userId = parseInt(this.route.snapshot.paramMap.get('userId')!);
-    this.getAlbumImages(this.albumId);
-    this.appService.albumPhotosObs.subscribe(data => {
+    this.albumService.albumPhotosObs.subscribe(data => {
       this.albumPhotos = data;
     });
-    this.appService.albumTitleObs.subscribe(data => {
+    this.albumService.albumTitleObs.subscribe(data => {
       this.albumTitle = data;
     })
+    this.getAlbumImages(this.albumId);
   }
 
   async getAlbumImages(albumId: number) {
     await this.service.getAlbumContent(albumId).then(() => this.albumPhotos = this.service.photosData);
     await this.service.getAlbumTitle(albumId).then(() => this.albumTitle = this.service.albumTitle);
-    this.sendDataToService();
+    this.albumService.setAlbumTitle(this.albumTitle);
   }
 
-  sendDataToService() {
-    this.appService.setAlbumPhotos(this.albumPhotos);
-    this.appService.setAlbumTitle(this.albumTitle);
-    this.appService.setAlbumId(this.albumId);
+  /**
+   * Toggles the visibility of new image panel and reset the form
+   */
+  openNewImagePanel = () => {
+    this.addingNewImage = !this.addingNewImage;
+    this.imageForm.reset();
   }
 
+
+  /**
+   * @param image - Used for removing image from the albumPhotos array.
+   * Method also supports take-back (undo) in case the user has accidentally deleted the image.
+   */
   handleImageDelete = (image: Photo) => {
     this.undo = false;
     let snackBarRef = this.snackBar.snackBarSuccess(`Image: '${image.id} - ${image.title}' deleted!`, 'Undo');
@@ -73,12 +80,10 @@ export class AlbumsComponent implements OnInit {
       this.snackBar.snackBarSuccess('Image restored', 'Ok');
     })
   }
-
-  openNewImagePanel = () => {
-    this.addingNewImage = !this.addingNewImage;
-    this.imageForm.reset();
-  }
-
+  /**
+   * Method used for adding new images to the albumPhotos array using image form.
+   * Method also supports take-back (undo) in case the user has accidentally added the image.
+   */
   handleAddNewImage = () => {
     this.undo = false;
     let newPhotoId = this.albumPhotos[this.albumPhotos.length - 1].id + 1;

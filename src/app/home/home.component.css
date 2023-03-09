@@ -6,7 +6,7 @@
     border-radius: 4px;
 }
 
-.home-title-label {
+.users-title-label {
     text-transform: uppercase;
     text-align:center;
 }
@@ -15,7 +15,7 @@
     margin: 0;
 }
 
-.userList {
+.user-list {
     padding: 8px;
     margin: 16px 0;
 }

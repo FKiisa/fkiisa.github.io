@@ -30,7 +30,7 @@
     margin: 4px;
 }
 
-.album-detail {
+.album-common {
     text-align: center;
     text-transform: uppercase;
 }
@@ -50,7 +50,6 @@
 
 .card-image {
   transition: .5s ease;
-  backface-visibility: hidden;
 }
 
 .image-overlay {
@@ -61,15 +60,10 @@
   left: 50%;
   transform: translate(-50%, -40%);
   -ms-transform: translate(-50%, -40%);
-  text-align: center;
   background: #1d1d1d;
   padding: 8px;
   border-radius: 4px;
   color: ghostwhite;
-}
-
-.card-footer:hover .album-action-container {
-    display: flex;
 }
 
 .card-header button {
@@ -89,15 +83,6 @@
     align-items: center;
 }
 
-.add-album-form {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    max-width: 100%;
-    justify-content: space-evenly;
-}
-
 .add-album-form-label {
     padding: 8px;
 }
@@ -109,8 +94,6 @@
 
 .user-stat-container {
     padding: 0 8px 8px;
-    text-align: center;
-    text-transform: uppercase;
     font-weight: 800;
 }
 
@@ -120,24 +103,14 @@
         margin: 4px;
     }
 
-    .card-footer {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: center;
-    }
-
-    .mat-mdc-card-header {
-        display: flex;
-        flex-direction: column;
-        padding: 8px !important;
-    }
-
     .card-header button {
-        color: white;
-        background-color: #f44336 !important; 
         margin: 8px 0 0;
         padding: 0 !important;
+    }
+    .add-album-form {
+        display: flex;
+        align-items: center;
+        max-width: 100%;
     }
   }
 
@@ -146,24 +119,10 @@
         width: 90%;
     }
 
-    .card-footer {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: center;
-    }
-
     .mat-mdc-card-header {
         display: flex;
         flex-direction: column;
         padding: 8px !important;
-    }
-    
-    .card-header button {
-        color: white;
-        background-color: #f44336 !important; 
-        margin: 8px 0 0;
-        padding: 0 !important;
     }
 
     .album-create-new-common {

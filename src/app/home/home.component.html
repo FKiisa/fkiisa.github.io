@@ -1,9 +1,9 @@
 <div class="root">
-  <h2 class="home-title-label">Users</h2>
+  <h2 class="users-title-label">Users</h2>
   <mat-accordion>
     <mat-expansion-panel
-      *ngFor="let user of users; let listIndex = index"
-      class="userList"
+      *ngFor="let user of users"
+      class="user-list"
       (opened)="listOpenState = true"
       (closed)="listOpenState = false"
     >

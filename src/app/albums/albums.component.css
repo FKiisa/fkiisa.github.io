@@ -7,13 +7,6 @@
     border-radius: 4px;
 }
 
-.image-list {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .image-element {
     width: 30%;
     margin: 4px;
@@ -38,7 +31,6 @@
     text-transform: capitalize;
 }
 
-
 .add-image-form {
     height: 60px;
     display: flex;
@@ -48,18 +40,8 @@
     justify-content: space-evenly;
 }
 
-.add-image-form-label {
+.add-image-form-input {
     padding: 8px;
-}
-
-.add-image-form-input-success {
-    padding: 8px;
-    margin: 8px;
-}
-
-.add-image-form-input-error {
-    padding: 8px;
-    border-color: red;
     margin: 8px;
 }
 
@@ -78,7 +60,7 @@
     .add-image-button-common {
         margin: 8px 0;
     }
-    .add-image-form-input-success {
+    .add-image-form-input {
         padding: 4px;
         margin: 4px;
     }
