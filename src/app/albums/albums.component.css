@@ -1,0 +1,91 @@
+.root {
+    text-align: center;
+    max-width: 800px;
+    background: white;
+    margin: 16px auto;
+    padding: 8px 16px 16px;
+    border-radius: 4px;
+}
+
+.image-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-element {
+    width: 30%;
+    margin: 4px;
+    object-fit: cover;
+}
+
+.image-element:hover{
+    opacity: 0.3;
+}
+
+.image-add {
+    padding: 8px 16px 16px;
+}
+
+.image-add-new {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.album-title {
+    text-transform: capitalize;
+}
+
+
+.add-image-form {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-evenly;
+}
+
+.add-image-form-label {
+    padding: 8px;
+}
+
+.add-image-form-input {
+    padding: 8px;
+    margin: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+    .image-add {
+        padding: 8px 16px 8px;
+    }
+    .image-element {
+        width: 45%;
+        margin: 4px;
+    }
+    .add-image-form{
+        height: unset;
+        flex-direction: column;
+    }
+    .add-image-button-common {
+        margin: 8px 0;
+    }
+    .add-image-form-input {
+        padding: 4px;
+        margin: 4px;
+    }
+    .add-image-form-label {
+        padding: 4px;
+    }
+    .album-note {
+        margin: 4px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .image-element {
+        width: 90%;
+    }
+}

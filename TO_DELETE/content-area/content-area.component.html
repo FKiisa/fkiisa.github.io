@@ -1,0 +1,34 @@
+<div class="root">
+  <h2>Welcome to the Ridango Web App</h2>
+  <div
+    *ngFor="let user of userArray; let listIndex = index"
+    class="userListRoot"
+  >
+    <mat-expansion-panel
+      class="userList"
+      (opened)="listOpenState = true"
+      (closed)="listOpenState = false"
+    >
+      <mat-expansion-panel-header class="infoBar">
+        <mat-panel-title> {{ user.name }} </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="listOpenState">
+        <p>ID: {{ user.id }}</p>
+        <p>Name: {{ user.name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <button [routerLink]="['users/2']" mat-raised-button (click)="getUserAlbums(user.id)">
+          Open {{ user.name }} albums
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </div>
+  <div *ngIf="userAlbums">
+    <h2 *ngIf="albumListState">List of albums </h2>
+    <li *ngFor="let album of userAlbums" style="list-style: none;">
+      <a mat-button [routerLink]="['/photos']" (click)="getAlbumPhotos(album.id)">
+        {{ album.id }} - {{ album.title }}
+      </a>
+    </li>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.root {
+    margin: 16px;
+}
+
+.userList {
+    padding: 8px;
+}
+
+.userListRoot:nth-child(2n) {
+    background-color: #1d1d1d20;
+}
+
+.userListRoot button {
+    background-color: white;
+}

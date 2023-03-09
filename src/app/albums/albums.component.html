@@ -1,0 +1,49 @@
+<div class="root">
+  <h2 class="album-title">
+    Album - {{ albumId }} - {{ albumTitle }} ({{ albumPhotos.length }} images)
+  </h2>
+  <p class="album-note"><b>NOTE:</b> Clicking on an image removes it from the album!</p>
+  <div class="image-add">
+    <button mat-raised-button (click)="openNewImagePanel()">
+      {{ addingNewImage ? "Close Panel" : "Add Image" }}
+    </button>
+    <div *ngIf="addingNewImage"></div>
+  </div>
+  <div *ngIf="addingNewImage" class="image-add-new">
+    <form
+      [formGroup]="imageForm"
+      class="add-image-form"
+      (ngSubmit)="handleAddNewImage()"
+    >
+      <label for="image-title" class="add-image-form-label"
+        >Image Title:
+      </label>
+      <input
+        id="image-title"
+        class="add-image-form-input"
+        type="text"
+        formControlName="imageTitle"
+      />
+
+      <label for="image-url" class="add-image-form-label">Image URL: </label>
+      <input
+        id="image-url"
+        class="add-image-form-input"
+        type="text"
+        formControlName="imageUrl"
+      />
+      <button mat-raised-button type="submit" [disabled]="!imageForm.valid" class="add-image-button-common">
+        Add Image
+      </button>
+    </form>
+  </div>
+  <div class="image-list">
+    <img
+      *ngFor="let photo of albumPhotos"
+      class="image-element"
+      src="{{ photo.url }}"
+      (click)="handleImageDelete(photo)"
+      loading="lazy"
+    />
+  </div>
+</div>

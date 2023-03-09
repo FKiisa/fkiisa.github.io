@@ -1,0 +1,15 @@
+.image-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-element {
+    width: 20%;
+    height: 20%;
+    margin: 4px;
+}
+.album-root {
+    text-align: center;
+}

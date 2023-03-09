@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    padding: 16px;
+}
+  
+  html, body {
+    background: #5B9EED;
+    color: #555;
+    height: 100%;
+  }
+  
+
+.cdk-overlay-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: black;
+}
+
+.green-snackbar {
+    background: #4CAF50;
+    color: white;
+    border-radius: 4px;
+}
+
+.green-snackbar button {
+    background-color: #4CAF50;
+    color: white !important;
+}
+
+.red-snackbar {
+    background: #af4c4c;
+    color: white;
+    border-radius: 4px;
+}
+
+.red-snackbar button {
+    background-color: #af4c4c;
+    color: white !important;
+}
+
+.mat-content {
+    flex-direction: column !important;
+}

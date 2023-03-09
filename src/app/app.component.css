@@ -1,0 +1,12 @@
+.toolbar {
+    text-align: center;
+  }
+
+  .homeIcon {
+    font-size: 1.3rem;
+    text-decoration: none;
+    color: #1d1d1d;
+    font-weight: 800;
+    padding: 16px 0;
+    text-align: center;
+  }

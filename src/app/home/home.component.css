@@ -1,0 +1,21 @@
+.root {
+    max-width: 800px;
+    background: white;
+    margin: 16px auto;
+    padding: 8px 16px 16px;
+    border-radius: 4px;
+}
+
+.home-title-label {
+    text-transform: uppercase;
+    text-align:center;
+}
+
+.user-info-header-text {
+    margin: 0;
+}
+
+.userList {
+    padding: 8px;
+    margin: 16px 0;
+}

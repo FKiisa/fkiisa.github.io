@@ -1,0 +1,17 @@
+<div class="album-root">
+  <h2 class="album-title">Album - {{ albumId }} - {{ albumTitle }}</h2>
+  <p><b>NOTE:</b> Clicking on an image removes it from the album!</p>
+  <div class="image-add">
+    <button mat-raised-button (click)="handleImageAdd()">Add Image</button>
+    <div *ngIf="addingNewGame"></div>
+  </div>
+  <div class="image-list">
+    <img
+      *ngFor="let photo of albumPhotos"
+      class="image-element"
+      src="{{ photo.url }}"
+      (click)="handleImageDelete(photo)"
+      loading="lazy"
+    />
+  </div>
+</div>

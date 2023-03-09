@@ -1,0 +1,21 @@
+<div class="root">
+  <h2 class="home-title-label">Users</h2>
+  <mat-accordion>
+    <mat-expansion-panel
+      *ngFor="let user of users; let listIndex = index"
+      class="userList"
+      (opened)="listOpenState = true"
+      (closed)="listOpenState = false"
+    >
+      <mat-expansion-panel-header class="user-info-panel">
+        <h4 class="user-info-header-text">{{ user.name }}</h4>
+        <p class="user-info-header-text">@{{ user.username }}</p>
+      </mat-expansion-panel-header>
+      <p>Name: {{ user.name }}</p>
+      <p>Email: {{ user.email }}</p>
+      <button [routerLink]="['user', user.id]" mat-raised-button>
+        Open {{ user.name }}s profile
+      </button>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
