@@ -1,6 +1,10 @@
-# RidangoTask
+# Ridango
 
-Ridango Test task
+Here's my shot at the task.
+
+## About project
+
+Project contains various API calls to `https://jsonplaceholder.typicode.com/`, it fetches user information, album information, photos and everything else. Project is responsive, and should work on all devices. All CTA buttons have undo functionality added to them, so when the user mistakingly does something, it can be restored.
 
 ## Guide to start project
 
@@ -9,3 +13,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ## Build the project
 
 Run `ng build --configuration production` to build the project. The build artifacts will be stored in the `docs/` directory.
+
+## Live Link
+
+Project can also be opened from the following link `https://fkiisa.github.io/`.
